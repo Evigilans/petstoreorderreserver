@@ -1,2 +1,4 @@
-package com.chtrembl.petstoreapp.petstoreorderreserver.entity;public class Cart {
+package com.chtrembl.petstoreapp.petstoreorderreserver.entity;
+
+public class Cart {
 }
