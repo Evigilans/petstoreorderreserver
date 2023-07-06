@@ -1,5 +1,6 @@
 package com.chtrembl.petstoreapp.petstoreorderreserver.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import com.azure.core.util.BinaryData;
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobClientBuilder;
@@ -10,10 +11,13 @@ import java.util.Map;
 @Service
 public class CartService {
 
+	@Value("${azure.storage.connection-string}")
+	private String connectionString;
+
 	public void update(Map<String, String> map) {
 		String fileName = java.util.UUID.randomUUID().toString();
 		BlobClient blobClient = new BlobClientBuilder()
-				.connectionString(System.getenv("CONNECTION_STRING"))
+				.connectionString(connectionString)
 				.containerName("msajdsa")
 				.blobName(fileName)
 				.buildClient();
