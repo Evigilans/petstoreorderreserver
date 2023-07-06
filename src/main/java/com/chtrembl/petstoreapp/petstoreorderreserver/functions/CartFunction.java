@@ -1,25 +1,41 @@
 package com.chtrembl.petstoreapp.petstoreorderreserver.functions;
 
-import com.chtrembl.petstoreapp.petstoreorderreserver.dto.ResponseDTO;
-import com.chtrembl.petstoreapp.petstoreorderreserver.entity.Cart;
-import com.chtrembl.petstoreapp.petstoreorderreserver.service.CartService;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.function.json.JsonMapper;
+
+import com.microsoft.azure.functions.ExecutionContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.Message;
 
+import java.util.Map;
 import java.util.function.Function;
 
 @Configuration
-@Log4j2
 public class CartFunction {
-	@Autowired
-	CartService cartService;
+	@Bean
+	public Function<Message<String>, String> update(JsonMapper mapper) {
+		return message -> {
+			String value = message.getPayload();
+			ExecutionContext context = (ExecutionContext) message.getHeaders().get("executionContext");
+			try {
+				Map<String, String> map = mapper.fromJson(value, Map.class);
 
-	@Bean("updateCart")
-	public Function<Cart, ResponseDTO> update() {
-		System.out.println("sout: update Function " + cartService);
-		log.info("logger: update Function " + cartService);
-		return cart -> cartService.update(cart);
+				if (map != null)
+					map.forEach((k, v) -> map.put(k, v != null ? v.toUpperCase() : null));
+
+				if (context != null)
+					context.getLogger().info(new StringBuilder().append("Function: ")
+							.append(context.getFunctionName())
+							.append(" is uppercasing ").append(value.toString()).toString());
+
+				return mapper.toString(map);
+			} catch (Exception e) {
+				e.printStackTrace();
+				if (context != null)
+					context.getLogger().severe("Function could not parse incoming request");
+
+				return ("Function error: - bad request");
+			}
+		};
 	}
 }
