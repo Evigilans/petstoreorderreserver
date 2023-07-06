@@ -18,7 +18,7 @@ public class CartService {
 		String fileName = java.util.UUID.randomUUID().toString();
 		BlobClient blobClient = new BlobClientBuilder()
 				.connectionString(connectionString)
-				.containerName("msajdsa")
+				//.containerName("msajdsa")
 				.blobName(fileName)
 				.buildClient();
 
