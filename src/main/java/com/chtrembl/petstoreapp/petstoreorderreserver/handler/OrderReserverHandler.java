@@ -21,4 +21,18 @@ public class OrderReserverHandler extends FunctionInvoker<Message<String>, Strin
 		Message<String> message = MessageBuilder.withPayload(request.getBody().get()).copyHeaders(request.getHeaders()).build();
 		return handleRequest(message, context);
 	}
+
+	@FunctionName("uppercase")
+	public String execute(
+			@HttpTrigger(
+					name = "req",
+					methods = {HttpMethod.GET, HttpMethod.POST},
+					authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
+			ExecutionContext context
+	) {
+		context.getLogger().warning("Using Java (" + System.getProperty("java.version") + ")");
+		Message<String> message = MessageBuilder.withPayload(request.getBody().get())
+				.copyHeaders(request.getHeaders()).build();
+		return handleRequest(message, context);
+	}
 }
