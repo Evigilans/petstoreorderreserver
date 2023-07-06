@@ -18,6 +18,7 @@ public class OrderItemsReserverController extends AzureSpringBootRequestHandler<
 			@HttpTrigger(name = "updateCartRequest", methods = {HttpMethod.POST},
 					authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<Cart>> request,
 			ExecutionContext context) {
-		return handleRequest(request.getBody().get(), context);
+		System.out.println("OrderItemsReserverController.update");
+		return handleRequest(request.getBody(), context);
 	}
 }

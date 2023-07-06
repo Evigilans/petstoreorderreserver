@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CartService {
 	public ResponseDTO update(Cart cart) {
+		System.out.println("CartService.update");
+
 		ResponseDTO responseDTO = new ResponseDTO();
 
 		if (cart != null) {
