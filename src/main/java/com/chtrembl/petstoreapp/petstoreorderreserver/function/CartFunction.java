@@ -37,7 +37,7 @@ public class CartFunction {
 				if (context != null)
 					context.getLogger().severe("Function could not parse incoming request");
 
-				return ("Function error: - bad request");
+				return ("Function error: - bad request: \n" + e.getMessage() + " \n cause: " + e.getCause());
 			}
 		};
 	}
