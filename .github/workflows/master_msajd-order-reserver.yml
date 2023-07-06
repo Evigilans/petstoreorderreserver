@@ -38,6 +38,6 @@ jobs:
         with:
           app-name: 'msajd-order-reserver'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C5FF147DADF34AE49B30A275882E867A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5B756B8087B846949CCDA42E50CD676A }}
           package: '${{ env.PACKAGE_DIRECTORY }}'
           respect-pom-xml: true
