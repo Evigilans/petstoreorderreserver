@@ -1,3 +1,4 @@
 azure:
   storage:
-    connection-string: 1234
+    connection-string: ${CONNECTION_STRING}
+    container-name: msajdsa
