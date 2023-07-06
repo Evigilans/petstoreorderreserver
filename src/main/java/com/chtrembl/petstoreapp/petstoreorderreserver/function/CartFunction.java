@@ -1,6 +1,8 @@
 package com.chtrembl.petstoreapp.petstoreorderreserver.function;
 
+import com.chtrembl.petstoreapp.petstoreorderreserver.service.CartService;
 import com.microsoft.azure.functions.ExecutionContext;
+import lombok.AllArgsConstructor;
 import org.springframework.cloud.function.json.JsonMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +12,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Configuration
-public class CartService {
+@AllArgsConstructor
+public class CartFunction {
+
+	private final CartService cartService;
+
 	@Bean
 	public Function<Message<String>, String> update(JsonMapper mapper) {
 		return message -> {
@@ -19,13 +25,11 @@ public class CartService {
 			try {
 				Map<String, String> map = mapper.fromJson(value, Map.class);
 
-				if (map != null)
-					map.forEach((k, v) -> map.put(k, v != null ? v.toLowerCase() : null));
+				cartService.update(map);
 
-				if (context != null)
-					context.getLogger().info(new StringBuilder().append("Function: ")
-							.append(context.getFunctionName())
-							.append(" is uppercasing ").append(value.toString()).toString());
+				if (context != null) {
+					context.getLogger().info("Function: " + context.getFunctionName() + " is uppercasing " + value);
+				}
 
 				return mapper.toString(map);
 			} catch (Exception e) {

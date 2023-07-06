@@ -1,0 +1,3 @@
+azure:
+  storage:
+    connection-string: 1234
