@@ -14,7 +14,7 @@ public class CartService {
 	@Value("${azure.storage.connection-string}")
 	private String connectionString;
 
-	public void update(Map<String, String> map) {
+	public void update(Map<Object, Object> map) {
 		String fileName = java.util.UUID.randomUUID().toString();
 		BlobClient blobClient = new BlobClientBuilder()
 				.connectionString(connectionString)
@@ -23,7 +23,6 @@ public class CartService {
 				.buildClient();
 
 		if (map != null) {
-			map.forEach((k, v) -> map.put(k, v != null ? v.toLowerCase() : null));
 			blobClient.upload(BinaryData.fromObject(map));
 		}
 	}
