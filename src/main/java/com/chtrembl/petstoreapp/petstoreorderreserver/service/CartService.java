@@ -26,7 +26,7 @@ public class CartService {
 					.containerName("msajdsa-blob")
 					.blobName(sessionId)
 					.buildClient();
-			blobClient.upload(BinaryData.fromObject(map));
+			blobClient.upload(BinaryData.fromObject(map), true);
 		}
 	}
 }
