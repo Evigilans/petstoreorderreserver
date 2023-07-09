@@ -25,7 +25,7 @@ public class ApplicationConfig {
 				Map<String, String> map = mapper.fromJson(value, Map.class);
 
 				if (map != null)
-					map.forEach((k, v) -> map.put(k, v != null ? v.toUpperCase() : null));
+					map.forEach((k, v) -> map.put(k, v != null ? v.toLowerCase() : null));
 
 				if (context != null)
 					context.getLogger().info(new StringBuilder().append("Function: ")
@@ -52,7 +52,7 @@ public class ApplicationConfig {
 				Map<String, String> map = mapper.fromJson(value, Map.class);
 
 				if (map != null)
-					map.forEach((k, v) -> map.put(k, v != null ? v.toUpperCase() : null));
+					map.forEach((k, v) -> map.put(k, v != null ? v.toLowerCase() : null));
 
 				if (context != null)
 					context.getLogger().info(new StringBuilder().append("Function: ")

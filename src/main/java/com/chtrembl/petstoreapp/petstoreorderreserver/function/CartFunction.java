@@ -1,5 +1,6 @@
 package com.chtrembl.petstoreapp.petstoreorderreserver.function;
 
+import com.chtrembl.petstoreapp.petstoreorderreserver.service.CartService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @AllArgsConstructor
 public class CartFunction {
 
-//	private final CartService cartService;
-//
+	private final CartService cartService;
+
 //	@Bean
 //	public Function<Message<String>, String> update(JsonMapper mapper) {
 //		return message -> {
