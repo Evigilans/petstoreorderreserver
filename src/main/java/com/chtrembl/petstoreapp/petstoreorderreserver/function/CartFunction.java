@@ -25,7 +25,7 @@ public class CartFunction {
 			ExecutionContext context = (ExecutionContext) message.getHeaders().get("executionContext");
 
 			try {
-				Map<Object, Object> map = mapper.fromJson(message.getPayload(), Map.class);
+				Map<String, Object> map = mapper.fromJson(message.getPayload(), Map.class);
 				if (context != null) {
 					context.getLogger().info("Function: " + context.getFunctionName() + " is... ");
 				}

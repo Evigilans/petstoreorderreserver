@@ -11,18 +11,21 @@ import java.util.Map;
 @Service
 public class CartService {
 
+	public static final String ID = "id";
+
 	@Value("${azure.storage.connection-string}")
 	private String connectionString;
 
-	public void update(Map<Object, Object> map) {
-		String fileName = java.util.UUID.randomUUID().toString();
-		BlobClient blobClient = new BlobClientBuilder()
-				.connectionString(connectionString)
-				.containerName("msajdsa-blob")
-				.blobName(fileName)
-				.buildClient();
-
+	public void update(Map<String, Object> map) {
 		if (map != null) {
+			String sessionId = (String) map.get(ID);
+			map.remove(sessionId);
+
+			BlobClient blobClient = new BlobClientBuilder()
+					.connectionString(connectionString)
+					.containerName("msajdsa-blob")
+					.blobName(sessionId)
+					.buildClient();
 			blobClient.upload(BinaryData.fromObject(map));
 		}
 	}
