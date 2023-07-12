@@ -8,4 +8,10 @@
 
 azure:
   storage:
-    connection-string: ${CONNECTION_STRING}
+    connection-string: ${STORAGE_CONNECTION_STRING}
+
+spring:
+  cloud:
+    azure:
+      servicebus:
+        connection-string: ${QUEUE_CONNECTION_STRING}
