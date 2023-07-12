@@ -1,11 +1,11 @@
-spring:
-  cloud:
-    azure:
-      keyvault:
-        secret:
-          property-sources[0]:
-            endpoint: https://msajdkv.vault.azure.net/
+#spring:
+#  cloud:
+#    azure:
+#      keyvault:
+#        secret:
+#          property-sources[0]:
+#            endpoint: https://msajdkv.vault.azure.net/
 
 azure:
   storage:
-    connection-string: ${storageAccountConnectionString}
+    connection-string: ${CONNECTION_STRING}
