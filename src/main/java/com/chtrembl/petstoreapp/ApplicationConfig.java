@@ -1,4 +1,4 @@
-package com.chtrembl.petstoreapp.petstoreorderreserver;
+package com.chtrembl.petstoreapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
